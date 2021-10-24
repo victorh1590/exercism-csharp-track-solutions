@@ -7,7 +7,7 @@ public static class Identifier
     public static string Clean(string identifier)
     {
         StringBuilder builder = new StringBuilder();
-        int[] greekLetters = Enumerable.Range('α', 'ω').ToArray();
+        int[] greekLetters = Enumerable.Range('α', (int)('ω' - 'α' + 1)).ToArray();
 
         for (int i = 0; i < identifier.Length; i++)
         {
