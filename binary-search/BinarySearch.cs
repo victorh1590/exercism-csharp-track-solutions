@@ -6,22 +6,21 @@ public static class BinarySearch
     {
         if (input.Length == 0) return -1;
         Array.Sort(input);
-
+        
         int lowerLimit = 0;
         int upperLimit = input.Length - 1;
 
-        while (true)
+        while (upperLimit - lowerLimit >= 0)
         {
             int middle = (lowerLimit + upperLimit) / 2;
             
             if (input[middle] == value) return middle;
-
-            if (upperLimit - lowerLimit <= 0) return -1;
 
             if (value < input[middle])
                 upperLimit = middle - 1;
             else
                 lowerLimit = middle + 1;
         }
+        return -1;
     }
 }
