@@ -9,6 +9,7 @@ public static class Triangle
         double sumOfSides = sides.Sum();
         return largerSide < (sumOfSides - largerSide);
     }
+    
     public static bool IsScalene(double side1, double side2, double side3)
         => side1 != side2 &&
            side1 != side3 &&
