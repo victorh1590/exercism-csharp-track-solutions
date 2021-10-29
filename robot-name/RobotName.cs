@@ -43,7 +43,7 @@ public class Robot
     private void RemoveRobot()
     {
         string letters = Name[..2];
-        string number = Name[2..^1];
+        string number = Name[^3..];
         ExistingRobots[letters].Remove(number);
         if (ExistingRobots[letters].Count == 0) ExistingRobots.Remove(letters);
     }
