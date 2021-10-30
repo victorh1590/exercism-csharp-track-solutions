@@ -4,9 +4,9 @@ using System.Linq;
 
 public static class ScrabbleScore
 {
-    private static Dictionary<char, int> _scoreTable = new();
-    private static int[] _scores = { 1,4,3,2,8,10,5 };
-    private static HashSet<char>[] _groups =
+    private static readonly Dictionary<char, int> ScoreTable = new();
+    private static readonly int[] Scores = { 1,4,3,2,8,10,5 };
+    private static readonly HashSet<char>[] Groups =
     {
         new() {'A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'},
         new() {'F', 'H', 'V', 'W', 'Y'},
@@ -20,15 +20,15 @@ public static class ScrabbleScore
     private static void BuildDictionary()
     {
         int i = 0;
-        foreach (var set in _groups)
+        foreach (var set in Groups)
         {
             foreach (var chr in set)
-                _scoreTable[chr] = _scores[i];
+                ScoreTable[chr] = Scores[i];
             i++;
         }
     }
         
-    private static int DigitValue(char chr) => _scoreTable.ContainsKey(chr) ? _scoreTable[chr] : 0;
+    private static int DigitValue(char chr) => ScoreTable.ContainsKey(chr) ? ScoreTable[chr] : 0;
 
     private static int CountCharacter(string input, char chr) => input.Count(c => c == chr);
 
@@ -36,7 +36,7 @@ public static class ScrabbleScore
     {
         int sum = 0;
         input = input.ToUpper().Trim();
-        if(_scoreTable.Count == 0) BuildDictionary();
+        if(ScoreTable.Count == 0) BuildDictionary();
 
         while (input.Length > 0)
         {
