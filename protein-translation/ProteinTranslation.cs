@@ -20,7 +20,6 @@ public static class ProteinTranslation
     {
         List<string> allProteins = new();
         int currentPosition = 0;
-        bool stop = false;
         strand = strand.ToUpper().Trim();
         
         while (currentPosition + 2  <= strand.Length - 1)
