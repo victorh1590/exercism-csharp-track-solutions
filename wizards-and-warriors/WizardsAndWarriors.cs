@@ -3,17 +3,8 @@ using System;
 abstract class Character
 {
     private string Type { get; }
-    
-    protected Character(string characterType)
-    {
-        var type = characterType.ToLower().Trim();
-        Type = type switch
-        {
-            "warrior" => "Warrior",
-            "wizard" => "Wizard",
-            _ => "Character"
-        };
-    }
+
+    protected Character(string characterType) => Type = GetType().Name;
     public abstract int DamagePoints(Character target);
     public virtual bool Vulnerable() => false;
     public override string ToString() => $"Character is a {Type}";
