@@ -38,5 +38,5 @@ public class Orm : IDisposable
         }
     }
     
-    public void Dispose() => database.Dispose();
+    public void Dispose() => database?.Dispose();
 }
