@@ -8,14 +8,10 @@ public class Orm : IDisposable
     {
         this.database = database;
     }
-
-    private void CurrentState() 
-        => Console.WriteLine($"{nameof(database)} has an internal state of {nameof(Database.State)}.{database.DbState}");
-
+    
     public void Begin()
     {
         database.BeginTransaction();
-        CurrentState();
     }
 
     public void Write(string data)
@@ -28,7 +24,6 @@ public class Orm : IDisposable
         {
             database.Dispose();
         }
-        CurrentState();
     }
 
     public void Commit()
@@ -39,9 +34,8 @@ public class Orm : IDisposable
             {
                 database.EndTransaction();
             }
-            catch (InvalidOperationException error) {}
+            catch(InvalidOperationException error) {}
         }
-        CurrentState();
     }
     
     public void Dispose() => database.Dispose();
