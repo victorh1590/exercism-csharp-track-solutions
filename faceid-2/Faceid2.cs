@@ -1,5 +1,7 @@
+#nullable enable
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 public class FacialFeatures : IEquatable<FacialFeatures>
 {
@@ -12,7 +14,6 @@ public class FacialFeatures : IEquatable<FacialFeatures>
         PhiltrumWidth = philtrumWidth;
     }
 
-    // TODO: implement equality and GetHashCode() methods
     public bool Equals(FacialFeatures? other)
     {
         if (other == null) return false;
@@ -21,7 +22,7 @@ public class FacialFeatures : IEquatable<FacialFeatures>
         return (EyeColor == other.EyeColor) && (PhiltrumWidth == other.PhiltrumWidth);
     }
     
-    public override bool Equals(object other) => this.Equals(other as FacialFeatures);
+    public override bool Equals(object? other) => this.Equals(other as FacialFeatures);
 
     public override int GetHashCode()
     {
@@ -39,7 +40,7 @@ public class Identity : IEquatable<Identity>
         Email = email;
         FacialFeatures = facialFeatures;
     }
-    // TODO: implement equality and GetHashCode() methods
+    
     public bool Equals(Identity? other)
     {
         if (other == null) return false;
@@ -49,14 +50,14 @@ public class Identity : IEquatable<Identity>
             FacialFeatures.Equals(other.FacialFeatures);
     }
     
-    public override bool Equals(object other) => this.Equals(other as Identity);
+    public override bool Equals(object? other) => this.Equals(other as Identity);
 
     public override int GetHashCode() => HashCode.Combine(Email, FacialFeatures);
 }
 
 public class Authenticator
 {
-    private HashSet<Identity> Identities = new();
+    private readonly HashSet<Identity> _identities = new();
 
     public static bool AreSameFace(FacialFeatures faceA, FacialFeatures faceB)
     {
@@ -65,32 +66,25 @@ public class Authenticator
 
     public bool IsAdmin(Identity identity)
     {
-        return identity.Equals(new Identity(
-            "admin@exerc.ism", 
-            new FacialFeatures("green", 0.9m))
+        return identity.Equals(
+            new Identity
+            (
+                "admin@exerc.ism", 
+                new FacialFeatures("green", 0.9m)
+            )
         );
     }
 
     public bool Register(Identity identity)
     {
         if (IsRegistered(identity)) return false;
-        Identities.Add(identity);
+        _identities.Add(identity);
         return true;
     }
 
-    public bool IsRegistered(Identity identity)
-    {
-        if (Identities.Count == 0) return false;
-        foreach (var entry in Identities)
-        {
-            if (entry.Equals(identity)) return true;
-        }
+    public bool IsRegistered(Identity identity) 
+        => _identities.Count != 0 && _identities.Any(entry => entry.Equals(identity));
 
-        return false;
-    }
-
-    public static bool AreSameObject(Identity identityA, Identity identityB)
-    {
-        return ReferenceEquals(identityA, identityB);
-    }
+    public static bool AreSameObject(Identity identityA, Identity identityB) 
+        => ReferenceEquals(identityA, identityB);
 }
