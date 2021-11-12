@@ -46,7 +46,7 @@ public class Identity : IEquatable<Identity>
         if (ReferenceEquals(this, other)) return true;
         if (GetType() != other.GetType()) return false;
         return Email == other.Email &&
-            this.Equals(other.FacialFeatures);
+            FacialFeatures.Equals(other.FacialFeatures);
     }
     
     public override bool Equals(object other) => this.Equals(other as Identity);
@@ -83,14 +83,14 @@ public class Authenticator
         if (Identities.Count == 0) return false;
         foreach (var entry in Identities)
         {
-            if (entry.Equals(identity)) return false;
+            if (entry.Equals(identity)) return true;
         }
 
-        return true;
+        return false;
     }
 
     public static bool AreSameObject(Identity identityA, Identity identityB)
     {
-        return identityA.Equals(identityB);
+        return ReferenceEquals(identityA, identityB);
     }
 }
