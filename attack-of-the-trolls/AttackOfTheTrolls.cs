@@ -14,8 +14,8 @@ public enum Permission
     Read   = 1 << 0,
     Write  = 1 << 1,
     Delete = 1 << 2,
-    All = Read | Write | Delete,
-    None = 0
+    All    = Read | Write | Delete,
+    None   = 0
 }
 
 static class Permissions
