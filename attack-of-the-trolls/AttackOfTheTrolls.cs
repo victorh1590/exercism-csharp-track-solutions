@@ -22,24 +22,12 @@ public enum Permission
 
 static class Permissions
 {
-    public static Permission Default(AccountType accountType)
-    {
-        return Enum.IsDefined(typeof(AccountType), accountType) ? 
-            Enum.Parse<Permission>( ((int)accountType).ToString() ) : Permission.None;
-    }
+    public static Permission Default(AccountType accountType) 
+        => Enum.IsDefined(typeof(AccountType), accountType) ? (Permission) accountType : Permission.None;
 
-    public static Permission Grant(Permission current, Permission grant)
-    {
-        return current | grant;
-    }
+    public static Permission Grant(Permission current, Permission grant) => current | grant;
 
-    public static Permission Revoke(Permission current, Permission revoke)
-    {
-        return current ^ (current & revoke);
-    }
+    public static Permission Revoke(Permission current, Permission revoke) => current ^ (current & revoke);
 
-    public static bool Check(Permission current, Permission check)
-    {
-        return (current & check) == check;
-    }
+    public static bool Check(Permission current, Permission check) => (current & check) == check;
 }
