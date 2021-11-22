@@ -1,6 +1,5 @@
 using System;
 
-// TODO: define the 'AccountType' enum
 [Flags]
 public enum AccountType
 {
@@ -9,7 +8,6 @@ public enum AccountType
     Moderator = Permission.All
 }
 
-// TODO: define the 'Permission' enum
 [Flags]
 public enum Permission
 {
