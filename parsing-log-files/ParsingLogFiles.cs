@@ -47,22 +47,21 @@ public class LogParser
 
     public string[] ListLinesWithPasswords(string[] lines)
     {
-        Regex pattern = new Regex(@"(?<pswd>password+(\w+)?)(?<secret>\s\w*)?");
-        // Regex pattern = new Regex(@"(?<pswd>password+(\w+)?)", RegexOptions.IgnoreCase);
+        Regex pattern = new Regex(@"(?<pswd>password\w+)", 
+            RegexOptions.Compiled | RegexOptions.IgnoreCase);
         List<string> result = new();
         foreach (var line in lines)
         {
-            var match = pattern.Matches(line);
-            if (match.Count >= 2)
+            if (pattern.IsMatch(line))
             {
-                result.Add("--------: " + line);
+                var match = pattern.Match(line);
+                result.Add(match + ": " + line);
             }
             else
             {
-                result.Add(match.First() + ": " + line);
+                result.Add("--------: " + line);
             }
         }
-
         return result.ToArray();
     }
 }
