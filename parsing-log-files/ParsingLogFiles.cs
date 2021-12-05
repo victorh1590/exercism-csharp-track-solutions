@@ -47,8 +47,8 @@ public class LogParser
 
     public string[] ListLinesWithPasswords(string[] lines)
     {
-        // Regex pattern = new Regex(@"(?<pswd>password+(\w+)?)(?<secret>\s\w*)?");
-        Regex pattern = new Regex(@"(?<pswd>password+(\w+)?)", RegexOptions.IgnoreCase);
+        Regex pattern = new Regex(@"(?<pswd>password+(\w+)?)(?<secret>\s\w*)?");
+        // Regex pattern = new Regex(@"(?<pswd>password+(\w+)?)", RegexOptions.IgnoreCase);
         List<string> result = new();
         foreach (var line in lines)
         {
