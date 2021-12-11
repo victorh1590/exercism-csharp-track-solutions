@@ -10,12 +10,12 @@ public static class WordCount
         Dictionary<string, int> histogram = new();
 
         Regex pattern = new Regex(
-            @"([0-9]||[A-z])(\w|\')+", 
+            @"\b([0-9]||[A-z])(\w|\')+\b", 
             RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         var matches = pattern
             .Matches(phrase)
-            .Select(match => match.ToString().ToLowerInvariant().Trim('\''));
+            .Select(match => match.ToString().ToLowerInvariant());
         
         foreach (var word in matches)
         {
