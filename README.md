@@ -1,3 +1,3 @@
 # Exercism C# track solutions.
 
-This are some exercises from [Exercism](https://exercism.org/). Check their site for a explanation of each exercise.
+Some exercises from [Exercism](https://exercism.org/). Explanation of each exercise in on their site.
